@@ -21,9 +21,17 @@ class Dices extends StatefulWidget {
 class _DicesState extends State<Dices> {
   var upperDiceNr = 1;
   var lowerDiceNr = 1;
+  Random random = new Random();
+
+  void randomize() {
+    setState(() {
+      upperDiceNr = random.nextInt(6) + 1;
+      lowerDiceNr = random.nextInt(6) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    Random random = new Random();
     return SafeArea(
       child: Container(
         child: Center(
@@ -38,10 +46,7 @@ class _DicesState extends State<Dices> {
                 padding: const EdgeInsets.all(20.0),
                 child: FlatButton(
                     onPressed: () {
-                      setState(() {
-                        upperDiceNr = random.nextInt(5) + 1;
-                        print(upperDiceNr);
-                      });
+                      randomize();
                     },
                     child: Image.asset('images/dice$upperDiceNr.png')),
               )),
@@ -50,10 +55,7 @@ class _DicesState extends State<Dices> {
                 padding: const EdgeInsets.all(20.0),
                 child: FlatButton(
                     onPressed: () {
-                      setState(() {
-                        lowerDiceNr = random.nextInt(5) + 1;
-                        print(lowerDiceNr);
-                      });
+                      randomize();
                     },
                     child: Image.asset('images/dice$lowerDiceNr.png')),
               )),
